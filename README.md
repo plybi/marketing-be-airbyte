@@ -16,6 +16,10 @@ Airbyte is on a mission to make data integration pipelines a commodity.
 
 Here's a list of our [connectors with their health status](docs/integrations/).
 
+## Version
+https://github.com/airbytehq/airbyte/releases/tag/v0.40.18
+Bao Tran custom project date 14/11/2022
+
 ## Quick start
 
 ```bash
