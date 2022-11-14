@@ -79,7 +79,7 @@ python main.py read --config integration_tests/invalid_config.json --catalog int
 #### Build
 First, make sure you build the latest Docker image:
 ```
-docker build . -t airbyte/source-bing-ads:dev
+docker build . -t airbyte/source-bing-ads-custom:dev
 ```
 
 You can also build the connector image via Gradle:
