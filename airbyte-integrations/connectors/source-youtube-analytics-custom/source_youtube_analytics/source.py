@@ -290,7 +290,6 @@ class SourceYoutubeAnalytics(AbstractSource):
 
         channel_reports = json.loads(pkgutil.get_data("source_youtube_analytics", "defaults/channel_reports.json"))
 
-        import pandas as pd
         streams = []
         for channel_report in channel_reports:
             stream_name = channel_report["id"]
@@ -300,6 +299,4 @@ class SourceYoutubeAnalytics(AbstractSource):
                 name=stream_name, jobs_resource=jobs_resource, job_id=job_id, start_time=start_time, authenticator=authenticator
             )
             streams.append(ChannelReports(name=stream_name, dimensions=dimensions, parent=parent, authenticator=authenticator))
-        df = pd.DataFrame(streams)
-        df.to_scv("test.csv")
         return streams
