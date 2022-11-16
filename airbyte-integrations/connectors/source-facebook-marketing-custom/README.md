@@ -57,7 +57,7 @@ python main.py read --config secrets/config.json --catalog integration_tests/con
 #### Build
 First, make sure you build the latest Docker image:
 ```
-docker build . -t airbyte/source-facebook-marketing:dev
+docker build . -t airbyte/source-facebook-marketing-custom:dev
 ```
 
 You can also build the connector image via Gradle:
