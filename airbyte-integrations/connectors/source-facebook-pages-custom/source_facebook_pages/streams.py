@@ -91,13 +91,30 @@ class Post(FacebookPagesStream):
     https://developers.facebook.com/docs/graph-api/reference/v11.0/page/feed,
     """
 
-    def path(self, **kwargs) -> str:
+    def path(
+        self, stream_state: Mapping[str, Any] = None, stream_slice: Mapping[str, Any] = None, next_page_token: Mapping[str, Any] = None
+    ) -> str:
         return f"{self._page_id}/posts"
 
-    def request_params(self, **kwargs) -> MutableMapping[str, Any]:
-        params = super().request_params(**kwargs)
-        params["fields"] = POST_FIELDS
+    def next_page_token(self, response: requests.Response) -> Optional[Mapping[str, Any]]:
+        data = response.json()
 
+        if not data.get("data") or not data.get("paging"):
+            return {}
+
+        return {
+            "limit": 100,
+            "after": data.get("paging", {}).get("cursors", {}).get("after"),
+        }
+
+    def request_params(
+        self,
+        stream_state: Mapping[str, Any],
+        stream_slice: Mapping[str, any] = None,
+        next_page_token: Mapping[str, Any] = None,
+    ) -> MutableMapping[str, Any]:
+        params = super().request_params(stream_state, stream_slice, next_page_token)
+        params["fields"] = POST_FIELDS
         return params
 
 
